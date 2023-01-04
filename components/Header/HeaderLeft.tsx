@@ -14,7 +14,7 @@ export const HeaderLeft = () => {
       <div className="flex ml-2 items-center rounded-full bg-gray-100 p-2">
         <MagnifyingGlassIcon className="h-6 text-gray-600" />
         <input
-          className="flex ml-2 items-center bg-transparent
+          className="hidden md:flex ml-2 items-center bg-transparent
           outline-none placeholder-gray-500"
           type="text"
           placeholder="Search Facebook"
