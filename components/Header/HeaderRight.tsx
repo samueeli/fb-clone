@@ -10,6 +10,7 @@ import React from 'react';
 
 interface HeaderRightProps {
   imgSource: any;
+  userName: string | null | undefined;
 }
 
 const handleSignout = () => {
@@ -17,7 +18,7 @@ const handleSignout = () => {
   signOut();
 };
 
-export const HeaderRight = ({ imgSource }: HeaderRightProps) => {
+export const HeaderRight = ({ imgSource, userName }: HeaderRightProps) => {
   return (
     <div className="flex items-center sm:space-x-2 justify-end">
       <Image
@@ -29,7 +30,7 @@ export const HeaderRight = ({ imgSource }: HeaderRightProps) => {
         alt="Sign out"
       />
       <p className="hidden sm:inline-flex whitespace-nowrap font-semibold pr-3">
-        User Name
+        {userName}
       </p>
       <Squares2X2Icon className="icon" />
       <ChatBubbleOvalLeftIcon className="icon" />

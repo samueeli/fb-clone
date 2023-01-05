@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Header from '../components/Header/Header';
 import Login from '../components/Login';
+import { Sidebar } from '../components/Sidebar/Sidebar';
 
 // 3:54:31
 
@@ -20,7 +21,7 @@ export default function Home() {
       <Header />
 
       <main>
-        {/* Sidebar */}
+        <Sidebar />
         {/* Feed */}
         {/* Widgets */}
       </main>

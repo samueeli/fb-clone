@@ -14,7 +14,10 @@ const Header = ({ imgSource }) => {
     >
       <HeaderLeft />
       <HeaderCenter />
-      <HeaderRight imgSource={session?.user?.image} />
+      <HeaderRight
+        imgSource={session?.user?.image}
+        userName={session?.user?.name}
+      />
     </div>
   );
 };
