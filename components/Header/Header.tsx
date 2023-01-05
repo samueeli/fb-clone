@@ -1,10 +1,12 @@
-import Image from 'next/image';
 import React from 'react';
+import { useSession } from 'next-auth/react';
 import { HeaderCenter } from './HeaderCenter';
 import { HeaderLeft } from './HeaderLeft';
 import { HeaderRight } from './HeaderRight';
 
-const Header = () => {
+const Header = ({ imgSource }) => {
+  const { data: session } = useSession();
+
   return (
     <div
       className="sticky top-0 z-50 bg-white flex items-center 
@@ -12,7 +14,7 @@ const Header = () => {
     >
       <HeaderLeft />
       <HeaderCenter />
-      <HeaderRight />
+      <HeaderRight imgSource={session?.user?.image} />
     </div>
   );
 };
