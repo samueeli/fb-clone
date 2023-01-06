@@ -13,15 +13,19 @@ export const Posts = () => {
     setPosts(postList);
   };
 
-  console.log('samulin postit', posts);
+  const sortedPosts = posts.sort(
+    (a, b) =>
+      new Date(b.timestamp?.toDate()).valueOf() -
+      new Date(a.timestamp?.toDate()).valueOf()
+  );
 
   useEffect(() => {
     getPosts(db);
-  }, []);
+  }, [posts]);
 
   return (
     <div>
-      {posts.map((post, index) => (
+      {sortedPosts.map((post, index) => (
         <Post
           key={index}
           image={post.image}
