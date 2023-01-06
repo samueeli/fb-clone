@@ -9,8 +9,6 @@ import React, { useRef } from 'react';
 import { db } from '../../firebase';
 import { addDoc, serverTimestamp, collection } from 'firebase/firestore';
 
-//@TODO fix the old firebase syntax to make things worl
-
 export const InputBox = () => {
   const { data: session } = useSession();
   const inputRef = useRef(null);
