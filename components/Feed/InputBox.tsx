@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useRef } from 'react';
 import { db } from '../../firebase';
-import firestore from 'firebase/firestore';
+import { addDoc, serverTimestamp, collection } from 'firebase/firestore';
 
 //@TODO fix the old firebase syntax to make things worl
 
@@ -15,17 +15,17 @@ export const InputBox = () => {
   const { data: session } = useSession();
   const inputRef = useRef(null);
 
-  const sendPost = (e) => {
+  const sendPost = async (e: any) => {
     e.preventDefault();
 
     if (!inputRef.current.value) return;
 
-    db.collection('posts').add({
+    await addDoc(collection(db, 'posts'), {
       message: inputRef.current.value,
       name: session?.user?.name,
       email: session?.user?.email,
       image: session?.user?.image,
-      timestamp: firestore.serverTimestamp(),
+      timestamp: serverTimestamp(),
     });
 
     inputRef.current.value = '';
