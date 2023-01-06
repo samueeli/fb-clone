@@ -5,13 +5,30 @@ import {
 } from '@heroicons/react/24/solid';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useRef } from 'react';
+import { db } from '../../firebase';
+import firestore from 'firebase/firestore';
+
+//@TODO fix the old firebase syntax to make things worl
 
 export const InputBox = () => {
   const { data: session } = useSession();
+  const inputRef = useRef(null);
 
   const sendPost = (e) => {
     e.preventDefault();
+
+    if (!inputRef.current.value) return;
+
+    db.collection('posts').add({
+      message: inputRef.current.value,
+      name: session?.user?.name,
+      email: session?.user?.email,
+      image: session?.user?.image,
+      timestamp: firestore.serverTimestamp(),
+    });
+
+    inputRef.current.value = '';
 
     console.log('Submitted a post');
   };
@@ -31,6 +48,7 @@ export const InputBox = () => {
           <input
             className="rounded-full h-12 bg-gray-100 flex-grow px-5 focus:ountline-none"
             type="text"
+            ref={inputRef}
             placeholder={`What's on your mind, ${session?.user?.name}?`}
           />
           <button hidden type="submit" onClick={sendPost}>
